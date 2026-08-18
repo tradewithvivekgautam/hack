@@ -1,0 +1,17 @@
+{
+  "name": "Arca \u2014 Agentic RWA Treasury",
+  "short_name": "Arca",
+  "description": "An auditable AI-managed RWA treasury on X Layer.",
+  "start_url": "/vault",
+  "display": "standalone",
+  "background_color": "#f9f9f8",
+  "theme_color": "#f98123",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

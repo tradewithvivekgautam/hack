@@ -1,0 +1,58 @@
+{
+  "name": "agentic-rwa-treasury",
+  "version": "1.0.0",
+  "private": true,
+  "description": "An auditable AI-managed ERC-4626 RWA treasury for X Layer.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.16.0",
+    "bun": ">=1.3.14"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "contracts"
+  ],
+  "scripts": {
+    "dev": "bun run --filter @agentic-rwa/shared build && bun run --filter @agentic-rwa/web dev",
+    "dev:web": "bun run --filter @agentic-rwa/shared build && bun run --filter @agentic-rwa/web dev",
+    "dev:agent": "bun run --filter @agentic-rwa/shared build && bun run --filter @agentic-rwa/agent dev",
+    "build": "bun run --filter @agentic-rwa/shared build && bun run --filter @agentic-rwa/agent build && bun run --filter @agentic-rwa/web build",
+    "typecheck": "bun run --filter @agentic-rwa/shared build && bun run --filter @agentic-rwa/agent typecheck && bun run --filter @agentic-rwa/contracts typecheck && bun run --filter @agentic-rwa/web typecheck",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint --write .",
+    "format": "biome format --write .",
+    "format:check": "node scripts/format-check.mjs",
+    "test": "bun run --filter @agentic-rwa/shared build && bun run --filter @agentic-rwa/shared test && bun run --filter @agentic-rwa/agent test && bun run --filter @agentic-rwa/contracts test && bun run --filter @agentic-rwa/web test",
+    "test:e2e": "bun run --filter @agentic-rwa/web test:e2e",
+    "contracts:compile": "bun run --filter @agentic-rwa/contracts compile",
+    "contracts:test": "bun run --filter @agentic-rwa/contracts test",
+    "contracts:node": "bun run --filter @agentic-rwa/contracts node",
+    "contracts:deploy:local": "bun run --filter @agentic-rwa/contracts deploy:local",
+    "contracts:deploy:testnet": "bun run --filter @agentic-rwa/contracts deploy:testnet",
+    "contracts:reject-demo": "bun run --filter @agentic-rwa/contracts demo:rejection",
+    "deployment:sync": "node scripts/sync-deployment.mjs",
+    "agent:epoch": "bun run --filter @agentic-rwa/shared build && bun run --filter @agentic-rwa/agent epoch",
+    "agent:worker": "bun run --filter @agentic-rwa/shared build && bun run --filter @agentic-rwa/agent worker",
+    "agent:smoke": "bun run --filter @agentic-rwa/shared build && bun run --filter @agentic-rwa/agent smoke",
+    "clean": "node scripts/clean.mjs",
+    "validate:repo": "node scripts/validate-repo.mjs",
+    "check": "bun run validate:repo && bun run static:check && bun run format:check && bun run lint && bun run typecheck && bun run test && bun run contracts:compile && bun run build",
+    "static:check": "node scripts/static-check.mjs",
+    "agent:verify": "bun run --filter @agentic-rwa/shared build && bun run --filter @agentic-rwa/agent verify:reasoning --",
+    "validate": "bun run validate:repo && bun run static:check",
+    "docker:web": "docker build -f apps/web/Dockerfile -t arca-web .",
+    "docker:agent": "docker build -f apps/agent/Dockerfile -t arca-agent .",
+    "local:configure": "node scripts/configure-local.mjs"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.6",
+    "@typescript/typescript6": "6.0.2",
+    "typescript": "7.0.2"
+  },
+  "packageManager": "bun@1.3.14",
+  "dependencies": {
+    "ox": "1.6.3",
+    "viem": "2.21.54"
+  }
+}

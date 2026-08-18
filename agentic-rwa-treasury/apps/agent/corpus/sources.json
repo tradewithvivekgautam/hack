@@ -1,0 +1,36 @@
+{
+  "sources": [
+    {
+      "id": "rwa-fund-factsheet",
+      "kind": "fund-factsheet",
+      "title": "Tokenized Treasury Fund — August factsheet",
+      "location": "rwa-fund-factsheet.md",
+      "publishedAt": "2026-08-12T00:00:00.000Z",
+      "staleAfterHours": 168
+    },
+    {
+      "id": "private-credit-memo",
+      "kind": "credit-memo",
+      "title": "Senior private-credit surveillance memo",
+      "location": "private-credit-memo.md",
+      "publishedAt": "2026-08-13T00:00:00.000Z",
+      "staleAfterHours": 72
+    },
+    {
+      "id": "rate-statement",
+      "kind": "rate-announcement",
+      "title": "Latest policy-rate statement",
+      "location": "rate-statement.md",
+      "publishedAt": "2026-07-29T18:00:00.000Z",
+      "staleAfterHours": 720
+    },
+    {
+      "id": "okx-rwa-exit-liquidity-fixture",
+      "kind": "liquidity",
+      "title": "OKX DEX exit-liquidity snapshot",
+      "location": "okx-liquidity.json",
+      "publishedAt": "2026-08-16T09:00:00.000Z",
+      "staleAfterHours": 6
+    }
+  ]
+}

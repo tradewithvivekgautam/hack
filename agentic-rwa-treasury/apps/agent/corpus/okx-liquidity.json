@@ -1,0 +1,9 @@
+{
+  "chainIndex": "196",
+  "venue": "OKX DEX Aggregator",
+  "observedAt": "2026-08-16T09:00:00.000Z",
+  "notionalUsd": 100000,
+  "estimatedPriceImpactBps": 28,
+  "routeAvailable": true,
+  "note": "Fixture used when authenticated OKX credentials are unavailable. The agent marks it stale through the cache fallback when a live request fails."
+}

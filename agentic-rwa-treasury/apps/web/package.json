@@ -1,0 +1,47 @@
+{
+  "name": "@agentic-rwa/web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@agentic-rwa/shared": "workspace:*",
+    "@base-ui/react": "1.6.0",
+    "@tanstack/react-form": "1.33.2",
+    "@tanstack/react-pacer": "0.21.1",
+    "@tanstack/react-query": "5.101.4",
+    "@tanstack/react-table": "9.0.0-beta.59",
+    "@tanstack/react-virtual": "3.14.9",
+    "clsx": "2.1.1",
+    "date-fns": "4.4.0",
+    "lucide-react": "1.28.0",
+    "next": "16.3.1",
+    "nuqs": "2.7.2",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "sonner": "2.0.7",
+    "tailwind-merge": "3.3.1",
+    "viem": "2.55.8",
+    "wagmi": "3.7.1",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.1",
+    "@tailwindcss/postcss": "4.3.3",
+    "@testing-library/jest-dom": "6.8.0",
+    "@testing-library/react": "16.3.0",
+    "@types/node": "24.3.0",
+    "@types/react": "19.1.12",
+    "@types/react-dom": "19.1.9",
+    "jsdom": "26.1.0",
+    "tailwindcss": "4.3.3",
+    "typescript": "7.0.2",
+    "vitest": "4.1.10"
+  }
+}

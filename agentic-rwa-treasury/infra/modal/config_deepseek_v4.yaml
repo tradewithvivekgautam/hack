@@ -1,0 +1,28 @@
+# General
+host: 0.0.0.0
+log-level: info
+
+# Model behavior
+tool-call-parser: deepseekv4
+reasoning-parser: deepseek-v4
+trust-remote-code: true
+
+# Memory and batching
+mem-fraction-static: 0.82
+chunked-prefill-size: 4096
+max-running-requests: 32
+cuda-graph-max-bs: 32
+
+# Blackwell MXFP4 MoE path
+moe-runner-backend: flashinfer_mxfp4
+
+# EAGLE speculative decoding
+speculative-algorithm: EAGLE
+speculative-num-steps: 3
+speculative-eagle-topk: 1
+speculative-num-draft-tokens: 4
+
+# Observability
+enable-metrics: true
+collect-tokens-histogram: true
+disable-flashinfer-autotune: true
