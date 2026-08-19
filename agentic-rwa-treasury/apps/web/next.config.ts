@@ -1,4 +1,7 @@
+import path from "node:path";
 import type { NextConfig } from "next";
+
+const sharedIndexPath = path.resolve(__dirname, "../../packages/shared/dist/index.js");
 
 const nextConfig: NextConfig = {
   output: "standalone",
@@ -16,6 +19,7 @@ const nextConfig: NextConfig = {
   ],
   turbopack: {
     resolveAlias: {
+      "@agentic-rwa/shared": sharedIndexPath,
       "@noble/curves/utils.js": "@noble/curves/abstract/utils",
       "@noble/curves/secp256k1.js": "@noble/curves/secp256k1",
       "@noble/hashes/sha2.js": "@noble/hashes/sha256",
@@ -29,6 +33,7 @@ const nextConfig: NextConfig = {
     config.resolve = config.resolve || {};
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
+      "@agentic-rwa/shared": sharedIndexPath,
       "@noble/curves/utils.js": "@noble/curves/abstract/utils",
       "@noble/curves/secp256k1.js": "@noble/curves/secp256k1",
       "@noble/hashes/sha2.js": "@noble/hashes/sha256",
