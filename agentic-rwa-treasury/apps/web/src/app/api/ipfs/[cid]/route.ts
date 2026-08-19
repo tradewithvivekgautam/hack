@@ -12,13 +12,23 @@ function demoEpoch(cid: string): number | null {
 }
 
 async function localPayload(cid: string): Promise<string | undefined> {
-  const directory = process.env.IPFS_LOCAL_DIRECTORY;
-  if (!directory) return undefined;
-  try {
-    return await readFile(resolve(process.cwd(), directory, `${cid}.json`), "utf8");
-  } catch {
-    return undefined;
+  const candidatePaths = [
+    process.env.IPFS_LOCAL_DIRECTORY
+      ? resolve(process.cwd(), process.env.IPFS_LOCAL_DIRECTORY, `${cid}.json`)
+      : null,
+    resolve(process.cwd(), "../../apps/agent/.data/ipfs", `${cid}.json`),
+    resolve(process.cwd(), "../agent/.data/ipfs", `${cid}.json`),
+    resolve(process.cwd(), ".data/ipfs", `${cid}.json`),
+  ].filter(Boolean) as string[];
+
+  for (const path of candidatePaths) {
+    try {
+      return await readFile(path, "utf8");
+    } catch {
+      // try next candidate
+    }
   }
+  return undefined;
 }
 
 export async function GET(
