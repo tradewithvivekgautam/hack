@@ -16,3 +16,4 @@ typechain-types/
 contracts/deployments/*.local.json
 playwright-report/
 test-results/
+scratch/
