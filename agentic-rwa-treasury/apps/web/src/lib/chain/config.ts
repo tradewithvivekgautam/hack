@@ -4,7 +4,8 @@ import {
   xLayerTestnet,
 } from "@agentic-rwa/shared";
 import { createConfig, http } from "wagmi";
-import { injected, walletConnect } from "wagmi/connectors";
+import { injected } from "wagmi/connectors/injected";
+import { walletConnect } from "wagmi/connectors/walletConnect";
 import { webEnv } from "@/config/env";
 
 export const wagmiConfig = createConfig({
