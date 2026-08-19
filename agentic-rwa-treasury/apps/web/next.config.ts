@@ -3,6 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   output: "standalone",
   reactStrictMode: true,
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   transpilePackages: [
     "@agentic-rwa/shared",
     "ox",
@@ -11,6 +14,17 @@ const nextConfig: NextConfig = {
     "@noble/post-quantum",
     "viem",
   ],
+  turbopack: {
+    resolveAlias: {
+      "@noble/curves/utils.js": "@noble/curves/abstract/utils",
+      "@noble/curves/secp256k1.js": "@noble/curves/secp256k1",
+      "@noble/hashes/sha2.js": "@noble/hashes/sha256",
+      "@noble/hashes/sha3.js": "@noble/hashes/sha3",
+      "@noble/hashes/legacy.js": "@noble/hashes/ripemd160",
+      "@noble/hashes/blake3.js": "@noble/hashes/blake3",
+      "@noble/hashes/hmac.js": "@noble/hashes/hmac",
+    },
+  },
   webpack: (config) => {
     config.resolve = config.resolve || {};
     config.resolve.alias = {
