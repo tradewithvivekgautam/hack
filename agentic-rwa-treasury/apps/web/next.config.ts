@@ -4,7 +4,7 @@ import type { NextConfig } from "next";
 const sharedIndexPath = path.resolve(__dirname, "../../packages/shared/dist/index.js");
 
 const nextConfig: NextConfig = {
-  output: "standalone",
+  output: process.env.BUILD_STANDALONE ? "standalone" : undefined,
   reactStrictMode: true,
   typescript: {
     ignoreBuildErrors: true,
