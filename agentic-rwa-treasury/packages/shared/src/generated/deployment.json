@@ -1,18 +1,18 @@
 {
   "schemaVersion": "1.0.0",
-  "chainId": 31337,
-  "deployedAt": "2026-08-19T07:14:17.449Z",
-  "deploymentBlock": "18",
-  "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+  "chainId": 1952,
+  "deployedAt": "2026-08-20T19:59:14.059Z",
+  "deploymentBlock": "38797123",
+  "deployer": "0x38dC1118b4370B1851eBda096D525d5D93044c74",
   "admin": "0x38dC1118b4370B1851eBda096D525d5D93044c74",
   "agent": "0x38dC1118b4370B1851eBda096D525d5D93044c74",
-  "asset": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
-  "policy": "0xe7f1725e7734ce288f8367e1bb143e90bb3f0512",
-  "registry": "0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0",
-  "vault": "0x0165878a594ca255338adfa4d48449f69242eb8f",
+  "asset": "0x6a28c1f30926d37c169563c2f9d7d38343771cad",
+  "policy": "0x1e6d202f904ea71676ae6ee39150a122fdf3a272",
+  "registry": "0xc488199a3a43b5031cc6a08258dfc9a6aff02d8e",
+  "vault": "0x1026915b0816623d9086bb7fb01e0f201ac03cc2",
   "adapters": {
-    "rwa": "0xcf7ed3acca5a467e9e704c703e8d87f634fb0fc9",
-    "lending": "0xdc64a140aa3e981100a9beca4e685f962f0cf6c9",
-    "idle": "0x5fc8d32690cc91d4c39d9d3abcbd16989f875707"
+    "rwa": "0x24e43b35bd032b1f267d3f92712f6f31c22ce9c6",
+    "lending": "0x84ea18cf599990963acb99f72416e1fe66900d15",
+    "idle": "0xf39947dd0296b3410595e080221066072c166146"
   }
 }
