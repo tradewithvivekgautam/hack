@@ -56,7 +56,12 @@ export function formatHash(value: string) {
 }
 
 export function formatRelativeDate(value: string | number | Date) {
-  return formatDistanceToNowStrict(new Date(value), { addSuffix: true });
+  if (!value) return "just now";
+  const date = new Date(value);
+  if (isNaN(date.getTime()) || date.getTime() <= 0) {
+    return "just now";
+  }
+  return formatDistanceToNowStrict(date, { addSuffix: true });
 }
 
 export function formatUtcDateTime(value: string | number | Date) {
