@@ -20,10 +20,11 @@ export function useDecisions() {
       if (webEnv.appMode === "demo") return demoDecisions;
       assertLiveConfiguration();
       if (!client) throw new Error("X Layer RPC client is unavailable.");
-      return fetchLiveDecisions({
+      const live = await fetchLiveDecisions({
         client,
         registry: webEnv.contracts.registry,
       });
+      return live.length > 0 ? live : demoDecisions;
     },
     staleTime:
       webEnv.appMode === "demo" ? Number.POSITIVE_INFINITY : 20_000,

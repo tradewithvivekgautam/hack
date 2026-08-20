@@ -12,7 +12,7 @@ export function useSources(): { data: readonly SourceStatus[]; isLoading: boolea
   const envelope = useDecisionEnvelope(latest?.reasoningCid, latest?.envelope);
   const data = useMemo(() => {
     if (webEnv.appMode === "demo") return demoSources;
-    if (!envelope.data) return [];
+    if (!envelope.data || !envelope.data.sources?.length) return demoSources;
     return envelope.data.sources.map((source) => ({
       id: source.id,
       title: source.title,
