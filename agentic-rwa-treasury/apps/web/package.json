@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "postbuild": "node -e \"const fs=require('fs'); if(!fs.existsSync('.next/export-detail.json')) fs.writeFileSync('.next/export-detail.json', JSON.stringify({version:1,outDirectory:'.next',success:true}));\"",
     "start": "next start",
     "typecheck": "tsc --noEmit",
