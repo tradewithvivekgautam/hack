@@ -33,9 +33,15 @@ const nextConfig: NextConfig = {
   },
   webpack: (config) => {
     config.resolve = config.resolve || {};
+    config.resolve.fallback = {
+      ...(config.resolve.fallback || {}),
+      "@react-native-async-storage/async-storage": false,
+      "pino-pretty": false,
+    };
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
       "@agentic-rwa/shared": sharedDistPath,
+      "@react-native-async-storage/async-storage": false,
       "@noble/curves/utils.js": "@noble/curves/abstract/utils",
       "@noble/curves/secp256k1.js": "@noble/curves/secp256k1",
       "@noble/hashes/sha2.js": "@noble/hashes/sha256",
