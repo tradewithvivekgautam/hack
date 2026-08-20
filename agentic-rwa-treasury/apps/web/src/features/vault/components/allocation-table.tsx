@@ -5,6 +5,8 @@ import { useMemo } from "react";
 import { Badge } from "@/components/ui/badge";
 import { DataTable, type BasicColumnDef } from "@/components/ui/data-table";
 import { ProgressBar } from "@/components/ui/progress-bar";
+import { TableLeadCell } from "@/components/ui/table-cells";
+import { Typography } from "@/components/ui/typography";
 import { formatBps, formatTokenUsd } from "@/lib/format";
 import type { StrategyPosition } from "../model/types";
 
@@ -24,28 +26,33 @@ export function AllocationTable({ strategies }: { strategies: readonly StrategyP
           const strategy = row.original;
           const Icon = strategyIcons[strategy.id];
           return (
-            <div className="flex min-w-[12rem] items-center gap-2.5">
-              <span className="grid size-7 place-items-center rounded-[0.5rem] border border-line bg-soft text-muted">
-                <Icon className="size-3.5" />
-              </span>
-              <div className="min-w-0">
-                <div className="font-medium text-ink">{strategy.name}</div>
-                <div className="mt-0.5 max-w-[17rem] truncate text-xs text-subtle">{strategy.description}</div>
-              </div>
-            </div>
+            <TableLeadCell
+              icon={Icon}
+              seed={strategy.id}
+              subtitle={strategy.description}
+              title={strategy.name}
+            />
           );
         },
       },
       {
         id: "allocation",
         header: "Allocation",
+        meta: {
+          headerClassName: "hidden md:table-cell",
+          cellClassName: "hidden md:table-cell",
+        },
         cell: ({ row }) => {
           const strategy = row.original;
           return (
-            <div className="min-w-[8rem]">
-              <div className="mb-1.5 flex items-center justify-between gap-3">
-                <span className="font-medium text-ink number-tabular">{formatBps(strategy.weightBps)}</span>
-                <span className="text-xs text-subtle">Target {formatBps(strategy.targetWeightBps)}</span>
+            <div className="min-w-[7.5rem]">
+              <div className="mb-1 flex items-center justify-between gap-2">
+                <Typography as="span" className="font-medium text-ink" variant="ui">
+                  {formatBps(strategy.weightBps)}
+                </Typography>
+                <Typography as="span" className="text-subtle" variant="caption">
+                  {formatBps(strategy.targetWeightBps)}
+                </Typography>
               </div>
               <ProgressBar value={strategy.weightBps / 100} />
             </div>
@@ -55,19 +62,43 @@ export function AllocationTable({ strategies }: { strategies: readonly StrategyP
       {
         accessorKey: "assets",
         header: "Assets",
-        cell: ({ row }) => <span className="font-medium text-ink number-tabular">{formatTokenUsd(row.original.assets)}</span>,
+        cell: ({ row }) => (
+          <Typography as="span" className="font-medium text-ink" variant="ui">
+            {formatTokenUsd(row.original.assets)}
+          </Typography>
+        ),
       },
       {
         accessorKey: "apyBps",
         header: "APY",
-        cell: ({ row }) => <span className="font-medium text-success number-tabular">{formatBps(row.original.apyBps)}</span>,
+        meta: {
+          headerClassName: "hidden sm:table-cell",
+          cellClassName: "hidden sm:table-cell",
+        },
+        cell: ({ row }) => (
+          <Typography as="span" className="font-medium text-success" variant="ui">
+            {formatBps(row.original.apyBps)}
+          </Typography>
+        ),
       },
       {
         accessorKey: "status",
         header: "State",
         cell: ({ row }) => (
-          <Badge className={row.original.status === "active" ? "border-success/20 bg-success-soft text-success" : "bg-soft text-muted"}>
-            <span className={row.original.status === "active" ? "size-1.5 rounded-full bg-success" : "size-1.5 rounded-full bg-subtle"} />
+          <Badge
+            className={
+              row.original.status === "active"
+                ? "border-success/20 bg-success-soft text-success"
+                : "bg-soft text-muted"
+            }
+          >
+            <span
+              className={
+                row.original.status === "active"
+                  ? "size-1.5 rounded-full bg-success"
+                  : "size-1.5 rounded-full bg-subtle"
+              }
+            />
             {row.original.status === "active" ? "Earning" : "Reserve"}
           </Badge>
         ),
@@ -76,5 +107,11 @@ export function AllocationTable({ strategies }: { strategies: readonly StrategyP
     [],
   );
 
-  return <DataTable columns={columns} data={strategies} getRowId={(strategy) => strategy.id} />;
+  return (
+    <DataTable
+      columns={columns}
+      data={strategies}
+      getRowId={(strategy) => strategy.id}
+    />
+  );
 }

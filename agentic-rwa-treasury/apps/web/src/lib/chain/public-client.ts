@@ -10,5 +10,13 @@ function rpcUrl(chainId: number): string {
 
 export function publicClient(chainId = webEnv.defaultChainId) {
   const chain = chainById(chainId);
-  return createPublicClient({ chain, transport: http(rpcUrl(chain.id)) });
+  return createPublicClient({
+    batch: {
+      multicall: {
+        deployless: chain.id === hardhatLocal.id,
+      },
+    },
+    chain,
+    transport: http(rpcUrl(chain.id)),
+  });
 }

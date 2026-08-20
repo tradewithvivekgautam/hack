@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/cn";
+import { typographyVariants } from "./typography";
 
 export function SegmentedControl<T extends string>({
   value,
@@ -17,7 +18,8 @@ export function SegmentedControl<T extends string>({
         <button
           key={item.value}
           className={cn(
-            "h-7 rounded-[0.5625rem] px-2.5 text-xs font-medium transition-colors",
+            typographyVariants.caption,
+            "h-7 rounded-[0.5625rem] px-2.5 font-medium leading-none transition-colors",
             value === item.value ? "bg-surface text-ink shadow-sm" : "text-ink-secondary hover:text-ink",
           )}
           onClick={() => onValueChange(item.value)}

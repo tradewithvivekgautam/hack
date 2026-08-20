@@ -1,2 +1,7 @@
 import { redirect } from "next/navigation";
-export default function HomePage() { redirect("/vault"); }
+
+export const instant = false;
+
+export default function HomePage() {
+  redirect("/vault");
+}

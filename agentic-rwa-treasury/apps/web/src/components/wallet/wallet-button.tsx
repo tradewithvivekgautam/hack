@@ -1,18 +1,42 @@
 "use client";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { ChevronDown, Wallet } from "lucide-react";
-import { useAccount, useDisconnect } from "wagmi";
 import { webEnv } from "@/config/env";
 import { formatAddress } from "@/lib/format";
 import { useDemoTreasury } from "@/lib/demo/demo-treasury";
 import { Button } from "@/components/ui/button";
-import { ConnectWalletDialog } from "./connect-wallet-dialog";
 
 export function WalletButton() {
   const demo = useDemoTreasury();
-  const account = useAccount();
-  const { disconnect } = useDisconnect();
-  const connected = webEnv.appMode === "demo" ? demo.connected : account.isConnected;
-  const address = webEnv.appMode === "demo" ? demo.address : account.address;
-  if (!connected || !address) return <ConnectWalletDialog />;
-  return <Button variant="secondary" size="sm" onClick={() => webEnv.appMode === "demo" ? demo.disconnect() : disconnect()}><Wallet className="size-3.5" /><span>{formatAddress(address)}</span><ChevronDown className="size-3" /></Button>;
+
+  if (webEnv.appMode === "demo") {
+    return (
+      <Button onClick={demo.disconnect} size="sm" variant="secondary">
+        <Wallet className="size-3.5" />
+        <span>{formatAddress(demo.address)}</span>
+        <ChevronDown className="size-3" />
+      </Button>
+    );
+  }
+
+  return (
+    <ConnectButton.Custom>
+      {({ mounted, account, chain, openAccountModal, openChainModal, openConnectModal }) => {
+        if (!mounted) return <span className="h-7 w-24 rounded-[0.5rem] bg-soft" />;
+        if (!account || !chain) {
+          return <Button onClick={openConnectModal} size="sm" variant="primary">Connect wallet</Button>;
+        }
+        if (chain.unsupported) {
+          return <Button onClick={openChainModal} size="sm" variant="danger">Wrong network</Button>;
+        }
+        return (
+          <Button onClick={openAccountModal} size="sm" variant="secondary">
+            <Wallet className="size-3.5" />
+            <span>{account.displayName}</span>
+            <ChevronDown className="size-3" />
+          </Button>
+        );
+      }}
+    </ConnectButton.Custom>
+  );
 }

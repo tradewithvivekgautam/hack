@@ -1,8 +1,6 @@
 import { chainById } from "@agentic-rwa/shared";
 import { webEnv } from "@/config/env";
 
-export const dynamic = "force-dynamic";
-
 export function GET() {
   const chain = chainById(webEnv.defaultChainId);
   return Response.json(

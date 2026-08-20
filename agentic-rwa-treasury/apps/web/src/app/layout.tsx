@@ -1,8 +1,16 @@
 import type { Metadata, Viewport } from "next";
+import { Geist } from "next/font/google";
 import type { ReactNode } from "react";
+import { AppFrame } from "@/components/auth/app-frame";
 import { assertLiveConfiguration } from "@/config/env";
 import "./globals.css";
 import { Providers } from "./providers";
+
+const geist = Geist({
+  display: "swap",
+  subsets: ["latin"],
+  variable: "--font-geist",
+});
 
 assertLiveConfiguration();
 
@@ -25,9 +33,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html className={geist.variable} lang="en" suppressHydrationWarning>
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <AppFrame>{children}</AppFrame>
+        </Providers>
       </body>
     </html>
   );

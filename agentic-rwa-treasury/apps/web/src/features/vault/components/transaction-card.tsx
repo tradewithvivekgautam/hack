@@ -9,7 +9,8 @@ import { Field } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Panel, PanelHeader } from "@/components/ui/panel";
 import { SegmentedControl } from "@/components/ui/segmented-control";
-import { ConnectWalletDialog } from "@/components/wallet/connect-wallet-dialog";
+import { Typography, typographyVariants } from "@/components/ui/typography";
+import { ConnectWalletButton } from "@/components/wallet/connect-wallet-button";
 import { formatToken } from "@/lib/format";
 import { useEffectiveAccount } from "@/lib/use-effective-account";
 import type { VaultSnapshot } from "../model/types";
@@ -115,16 +116,16 @@ export function TransactionCard({ snapshot }: { snapshot: VaultSnapshot }) {
                     value={field.state.value}
                   />
                   <div className="absolute inset-y-0 right-2 flex items-center gap-1.5">
-                    <span className="text-xs font-medium text-muted">mUSDC</span>
-                    <button className="rounded px-1.5 py-0.5 text-xs font-semibold text-accent hover:bg-accent-soft" onClick={setMaximum} type="button">
+                    <Typography as="span" className="font-medium text-muted" variant="caption">mUSDC</Typography>
+                    <button className={`${typographyVariants.caption} rounded px-1.5 py-0.5 font-semibold text-accent hover:bg-accent-soft`} onClick={setMaximum} type="button">
                       Max
                     </button>
                   </div>
                 </div>
-                <div className="mt-2 flex items-center justify-between rounded-[0.625rem] bg-soft px-2.5 py-2 text-xs">
+                <Typography as="div" className="mt-2 flex max-w-none items-center justify-between rounded-[0.625rem] bg-soft px-2.5 py-2" variant="caption">
                   <span className="text-subtle">Estimated {type === "deposit" ? "shares received" : "shares burned"}</span>
                   <span className="font-medium text-ink number-tabular">{formatToken(estimatedShares)} rtUSD</span>
-                </div>
+                </Typography>
               </Field>
             );
           }}
@@ -151,18 +152,18 @@ export function TransactionCard({ snapshot }: { snapshot: VaultSnapshot }) {
               )}
             </form.Subscribe>
           ) : (
-            <ConnectWalletDialog />
+            <ConnectWalletButton />
           )}
         </div>
 
-        <div className="mt-3 flex items-start gap-2 text-xs leading-4 text-subtle">
+        <Typography as="div" className="mt-3 flex max-w-none items-start gap-2 text-subtle" variant="caption">
           {type === "deposit" ? <Coins className="mt-0.5 size-3 shrink-0" /> : <Wallet className="mt-0.5 size-3 shrink-0" />}
           <span>
             {type === "deposit"
               ? "Live mode approves only the entered amount before depositing. The demo performs the same accounting without a wallet signature."
               : "The vault sources idle liquidity first, then lending, then the RWA adapter, in one atomic transaction."}
           </span>
-        </div>
+        </Typography>
       </form>
     </Panel>
   );

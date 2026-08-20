@@ -3,18 +3,16 @@ import { resolve } from "node:path";
 import { webEnv } from "@/config/env";
 import { getDemoReasoningText } from "@/lib/demo/decisions";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 function demoEpoch(cid: string): number | null {
   const match = /^demo-epoch-(\d{1,3})$/.exec(cid);
   return match ? Number(match[1]) : null;
 }
 
 async function localPayload(cid: string): Promise<string | undefined> {
+  const localDirectory = process.env["IPFS_LOCAL_DIRECTORY"];
   const candidatePaths = [
-    process.env.IPFS_LOCAL_DIRECTORY
-      ? resolve(process.cwd(), process.env.IPFS_LOCAL_DIRECTORY, `${cid}.json`)
+    localDirectory
+      ? resolve(process.cwd(), localDirectory, `${cid}.json`)
       : null,
     resolve(process.cwd(), "../../apps/agent/.data/ipfs", `${cid}.json`),
     resolve(process.cwd(), "../agent/.data/ipfs", `${cid}.json`),

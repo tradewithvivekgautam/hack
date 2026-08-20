@@ -3,9 +3,6 @@ import { privateKeyToAccount } from "viem/accounts";
 import { hardhatLocal } from "@agentic-rwa/shared";
 import { webEnv } from "@/config/env";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 const erc20Abi = [
   {
     type: "function",
@@ -69,7 +66,7 @@ export async function POST(request: Request) {
 
     // Deployer account on Hardhat Local (Account #0)
     const relayerAccount = privateKeyToAccount(
-      (process.env.RELAYER_PRIVATE_KEY as `0x${string}`) ||
+      (process.env["RELAYER_PRIVATE_KEY"] as `0x${string}`) ||
       "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80"
     );
 

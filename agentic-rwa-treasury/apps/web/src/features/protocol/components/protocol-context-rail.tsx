@@ -1,29 +1,74 @@
 import Link from "next/link";
-import { Bot, Braces, Database, FileKey2, ShieldCheck, WalletCards } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
+import { Typography } from "@/components/ui/typography";
+import {
+  isProtocolSectionActive,
+  protocolSections,
+} from "@/config/protocol-sections";
+import { ProtocolSectionIcon } from "./protocol-section-icon";
 
-const sections = [
-  ["#architecture", "Architecture", Braces],
-  ["#policy-simulator", "Policy simulator", ShieldCheck],
-  ["#security", "Security model", FileKey2],
-  ["#contracts", "Contracts", WalletCards],
-  ["#agent", "Agent pipeline", Bot],
-  ["#persistence", "Persistence", Database],
-] as const;
+const sectionLinkClassName =
+  "flex h-9 items-center gap-2.5 rounded-[0.5625rem] px-2 text-[0.8125rem] leading-tight text-muted transition-[background-color,color,box-shadow,transform] duration-150 hover:bg-soft hover:text-ink active:scale-[0.97] aria-[current=page]:bg-surface aria-[current=page]:font-medium aria-[current=page]:text-ink aria-[current=page]:shadow-[var(--shadow-surface)] aria-[current=page]:ring-1 aria-[current=page]:ring-line";
 
 export function ProtocolContextRail() {
+  const pathname = usePathname();
+
   return (
-    <div className="flex h-full min-h-screen flex-col">
-      <div className="flex h-14 items-center justify-between border-b border-line px-4"><span className="text-[0.8125rem] font-semibold text-ink">Protocol map</span><Badge>v1.0</Badge></div>
-      <nav className="flex-1 p-3">
-        <div className="px-2 pb-1 text-xs font-semibold uppercase tracking-[0.08em] text-subtle">Sections</div>
+    <div className="flex h-full min-h-0 flex-col">
+      <div className="flex h-12 items-center justify-between px-3">
+        <Typography as="span" className="text-ink" variant="title">
+          Protocol map
+        </Typography>
+        <Badge>v1.0</Badge>
+      </div>
+      <nav
+        aria-label="Protocol sections"
+        className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-3 [scrollbar-gutter:stable]"
+      >
+        <Typography
+          as="div"
+          className="px-2 pb-1.5 text-subtle"
+          variant="label"
+        >
+          Sections
+        </Typography>
         <div className="grid gap-1">
-          {sections.map(([href, label, Icon]) => <Link className="flex h-9 items-center gap-2.5 rounded-[0.5rem] px-2 text-xs text-muted hover:bg-soft hover:text-ink" href={`/protocol${href}`} key={href}><Icon className="size-3.5" />{label}</Link>)}
+          {protocolSections.map((section) => {
+            const active = isProtocolSectionActive(pathname, section.href);
+            return (
+              <Link
+                aria-current={active ? "page" : undefined}
+                className={sectionLinkClassName}
+                href={section.href}
+                key={section.href}
+              >
+                <ProtocolSectionIcon
+                  active={active}
+                  compact
+                  section={section}
+                />
+                {section.label}
+              </Link>
+            );
+          })}
         </div>
         <div className="mt-4 rounded-[0.875rem] border border-line bg-surface p-3">
-          <p className="text-xs font-semibold text-ink">Core invariant</p>
-          <p className="mt-2 text-[0.8125rem] font-semibold tracking-[-0.02em] text-accent-strong">The LLM proposes.<br />The contract disposes.</p>
-          <p className="mt-2 text-xs leading-4 text-subtle">Model compromise cannot change the strategy set, custody assets, bypass limits, or choose an arbitrary receiver.</p>
+          <Typography className="text-ink" variant="title">
+            Core invariant
+          </Typography>
+          <Typography
+            className="mt-2 font-semibold tracking-[-0.02em] text-accent-strong"
+            variant="ui"
+          >
+            The LLM proposes.
+            <br />
+            The contract disposes.
+          </Typography>
+          <Typography className="mt-2 text-subtle" variant="caption">
+            Model compromise cannot change the strategy set, custody assets,
+            bypass limits, or choose an arbitrary receiver.
+          </Typography>
         </div>
       </nav>
     </div>
