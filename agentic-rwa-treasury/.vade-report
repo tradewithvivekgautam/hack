@@ -1,0 +1,50 @@
+## Vercel Web Analytics Installation
+
+Successfully installed and configured Vercel Web Analytics for this Next.js project.
+
+### Changes Made
+
+#### 1. Installed @vercel/analytics Package
+- Added `@vercel/analytics@2.0.1` to dependencies using bun
+- Updated `apps/web/package.json` with the new dependency
+- Updated `bun.lock` with dependency resolution
+
+#### 2. Configured Analytics Component
+- Modified `apps/web/src/app/layout.tsx` to integrate the Analytics component
+- Added import: `import { Analytics } from "@vercel/analytics/next";`
+- Placed `<Analytics />` component at the end of the `<body>` tag (after the app content)
+- Organized imports to comply with the project's linting rules (biome)
+
+### Implementation Details
+
+Following the official Vercel documentation for Next.js App Router:
+- The Analytics component was imported from `@vercel/analytics/next`
+- The component was placed at the end of the body to ensure it doesn't block page rendering
+- No additional configuration is required - the component will automatically work when deployed to Vercel
+
+### Framework Details
+- **Framework**: Next.js 16.3.1 with App Router
+- **Package Manager**: Bun (v1.3.14)
+- **Analytics Package**: @vercel/analytics v2.0.1
+
+### Files Modified
+- `apps/web/package.json` - Added @vercel/analytics dependency
+- `apps/web/src/app/layout.tsx` - Added Analytics component
+- `bun.lock` - Updated lock file with new dependency
+
+### Verification
+- Lint check passed for the modified layout.tsx file
+- Import order fixed to match project's biome linting rules
+- Package successfully installed and added to dependencies
+
+### Next Steps
+Once deployed to Vercel:
+1. Enable Web Analytics in the Vercel dashboard (Project Settings → Analytics)
+2. Visit the deployed site to generate analytics data
+3. Check the browser's Network tab for requests to verify Analytics is working
+4. View analytics data in the Vercel dashboard
+
+The implementation follows best practices:
+- Analytics component is placed at the end of body to not block rendering
+- Preserves existing code structure and patterns
+- Uses the latest stable version of @vercel/analytics
