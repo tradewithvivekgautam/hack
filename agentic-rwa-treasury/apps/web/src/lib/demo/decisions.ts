@@ -22,7 +22,7 @@ export function getDemoDecision(epoch: number): DecisionRecord {
     schemaVersion: "1.0.0",
     epochRequestedAt: timestamp,
     chain: { chainId: 1952, vault },
-    model: { provider: "deepseek", modelId: "deepseek-v4-pro", temperature: 0.1, reasoningMode: "enabled" },
+    model: { provider: "modal", modelId: "arca-reasoning-v4", temperature: 0.1, reasoningMode: "enabled" },
     prompt: { version: "allocation-v1.0.0", hash: hashUtf8Text("allocation-v1.0.0") },
     policy: { maxWeightBps: 6000, maxTurnoverBps: 2000, cooldownSeconds: 3600 },
     currentWeights: previous,

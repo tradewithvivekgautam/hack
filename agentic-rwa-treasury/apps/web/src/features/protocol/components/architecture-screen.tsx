@@ -15,7 +15,7 @@ import { ProtocolSectionIcon } from "./protocol-section-icon";
 const section = getProtocolSection("/protocol/architecture");
 
 const architecture = [
-  { icon: Bot, title: "DeepSeek allocator", text: "Reads bounded source documents and emits one schema-validated allocation proposal with cited evidence." },
+  { icon: Bot, title: "Autonomous AI allocator", text: "Reads bounded source documents and emits one schema-validated allocation proposal with cited evidence." },
   { icon: Braces, title: "TypeScript preflight", text: "Validates shape, evidence IDs, policy, canonical bytes, live preflight, IPFS read-back, and exact viem simulation." },
   { icon: ShieldCheck, title: "Allocation policy", text: "Enforces fixed strategies, exact weight sum, 60% concentration, 20% turnover, and one-hour cooldown." },
   { icon: WalletCards, title: "ERC-4626 vault", text: "Holds custody, accounts for rtUSD shares, sources withdrawal liquidity, and performs atomic two-phase rebalances." },
