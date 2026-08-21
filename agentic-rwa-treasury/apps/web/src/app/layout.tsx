@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import type { ReactNode } from "react";
+import { Analytics } from "@vercel/analytics/next";
 import { AppFrame } from "@/components/auth/app-frame";
 import { assertLiveConfiguration } from "@/config/env";
 import "./globals.css";
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Providers>
           <AppFrame>{children}</AppFrame>
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
